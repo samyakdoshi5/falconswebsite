@@ -43,14 +43,9 @@ function assetsForPath(pathname) {
       ];
     case "/flagships":
       return [
-        `${PUBLIC}/images/flagships/vidhyut-cover@2x.jpg`,
-        `${PUBLIC}/images/flagships/thumbnail-01.jpg`,
       ];
     case "/gallery":
       return [
-        `${PUBLIC}/images/gallery/cover@2x.jpg`,
-        `${PUBLIC}/images/gallery/highres-001.jpg`,
-        `${PUBLIC}/images/gallery/highres-002.jpg`,
       ];
     case "/contact":
     case "/contact/":

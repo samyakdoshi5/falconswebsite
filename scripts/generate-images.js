@@ -6,7 +6,7 @@ const path = require('path');
 const srcDir = path.join(__dirname, '..', 'public', 'images', 'all');
 const sizes = [400, 800, 1600];
 const thumbSize = 320;
-const thumbDir = path.join(srcDir, 'thumbs');
+const thumbDir = path.join(srcDir,'');
 
 if (!fs.existsSync(srcDir)) {
     console.error('Source directory not found:', srcDir);
