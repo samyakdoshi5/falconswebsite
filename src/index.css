@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6; 
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE + Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+@media (max-width: 768px) {
+  html, body {
+    -ms-overflow-style: none;    /* IE & Edge */
+    scrollbar-width: none;       /* Firefox */
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;               /* Chrome, Safari, Opera */
+  }
+}
+
+.vimeo-overscale {
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+width: 140vw;
+height: 140vh;
+max-width: none;
+max-height: none;
+overflow: hidden;
+}
+
+
+@media (min-width: 768px) {
+.vimeo-overscale {
+width: 120vw;
+height: 120vh;
+}
+}

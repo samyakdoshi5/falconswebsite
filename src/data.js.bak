@@ -1,0 +1,348 @@
+// src/data.js
+import { PenTool, Plane, Cpu, BarChart } from 'lucide-react';
+
+const PUBLIC = process.env.PUBLIC_URL || "";
+
+// =================================================================================
+// 1. GENERAL TEAM INFO
+// =================================================================================
+export const TEAM_INFO = {
+  name: "Assailing Falcons",
+  smalllogo: `${PUBLIC}/images/falconslogobird.png`,
+  logo: `${PUBLIC}/images/falconslogo.png`,
+  gif: `${PUBLIC}/images/loading.gif`,
+  shortName: "Falcons",
+  email: "assailingfalcons@vit.ac.in",
+  phone: "+91 98765 43210",
+  address: `Vellore Institute of Technology
+Vellore, Tamil Nadu, India
+632014`,
+  socialLinks: {
+    Youtube: "https://www.youtube.com/@assailingfalcons_vit",
+    linkedin: "https://www.linkedin.com/company/assailing-falcons/",
+    instagram: "https://www.instagram.com/assailingfalcons/",
+  }
+};
+
+// =================================================================================
+// 2. HOME PAGE DATA
+// =================================================================================
+export const HERO_DATA = {
+  backgroundImage: "https://vimeo.com/embed/1138938605",
+  posterImage: `${PUBLIC}/images/Hero-Image.jpg`,
+  titleStart: "PUSHING THE LIMITS OF",
+  titleHighlight: "FLIGHT",
+  subtitle: "Designing, building, and flying the next generation of UAVs.",
+  brochureLink: `${PUBLIC}/AssailingFalcons25-Brochure.pdf`,
+  buttonText: "Download Brochure"
+};
+
+export const ABOUT_DATA = {
+  teamTitle: "Our Team",
+  teamText: "We are a diverse, interdisciplinary group of over 50 passionate undergraduate students drawn from various engineering disciplines, including Aerospace, Mechanical, Electrical, and Computer Science. Beyond technical skills, we prioritize a strong collaborative culture, demanding long hours and high standards of professionalism. Every member is a specialist in their department—from aerodynamics analysis to composite manufacturing—contributing to a unified goal: achieving flight excellence under stringent competition rules. We operate as a real-world engineering firm, focused on mentorship and the transfer of knowledge between graduating and incoming members to ensure sustained competitive success.",
+  missionTitle: "Our Mission",
+  missionText: "Our mission is threefold: To Pioneer Innovation by consistently developing cutting-edge airframe designs and technologies; to Achieve Excellence by securing top global placements in prestigious competitions like the SAE AeroDesign series; and, critically, to Cultivate Future Engineers. We aim to provide an immersive, hands-on learning environment that challenges traditional classroom knowledge. By solving complex, open-ended problems related to flight mechanics, structures, and systems integration, we prepare our members to become leaders in the global aerospace industry."
+};
+
+export const DEPARTMENTS_DATA = [
+  { icon: PenTool, title: "Design", desc: "Aerodynamics. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  { icon: Plane, title: "Structures", desc: "Airframe. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  { icon: Cpu, title: "Avionics", desc: "Systems & Autonomous flight. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
+  { icon: BarChart, title: "Management", desc: "Logistics & Sponsorships. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." }
+];
+
+export const STATS_DATA = [
+  { label: "Founding Year", value: "2010" },
+  { label: "Aircraft Built", value: "20+" },
+  {
+    label: `World
+Rank`, value: "#3"
+  },
+  { label: "India Rank", value: "#1" }
+];
+
+// src/data.js (SPONSORS_LOGOS)
+export const SPONSORS_LOGOS = [
+  { logoUrl: `${PUBLIC}/images/sponsors/apc.png`, websiteUrl: "https://www.apcprop.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/chaservo.png`, websiteUrl: "https://www.chaservo.com/en" },
+  { logoUrl: `${PUBLIC}/images/sponsors/electo.png`, websiteUrl: "https://www.electo.co.in/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/emax.png`, websiteUrl: "https://emax-usa.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/gemfan.png`, websiteUrl: "https://www.gfprops.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/hitec.png`, websiteUrl: "https://hitecrcd.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/holybro.png`, websiteUrl: "https://holybro.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/iflight.png`, websiteUrl: "https://www.iflight.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/savox.png`, websiteUrl: "https://www.savoxusa.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/simnet.png`, websiteUrl: "https://www.simnet.aero/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/simscale.png`, websiteUrl: "https://www.simscale.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/solidworks.png`, websiteUrl: "https://www.solidworks.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/uavgarage.png`, websiteUrl: "https://uavgarage.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/whoopmasters.png`, websiteUrl: "https://whoopmastersindia.com/" },
+  { logoUrl: `${PUBLIC}/images/sponsors/zerodrag.png`, websiteUrl: "https://zerodrag.in/" },
+];
+
+// =================================================================================
+// 3. FLAGSHIPS (AIRCRAFT) PAGE
+// =================================================================================
+// NOTE: IDs are assigned sequentially. Change IDs if you rely on them elsewhere.
+export const AIRCRAFT_DATA = [
+  {
+    id: 1,
+    name: "Vidhyut",
+    year: "2025",
+    mission: "Autonomous Tiltrotor VTOL",
+    rank: ["1st Design Report", "3rd Flight Demonstration Readiness Review", "4th Flight Performance", "3rd Overall"],
+    coverImage: `${PUBLIC}/images/all/Vidhyut-Hero.jpg`,
+    description: "Vidhyut is an advanced autonomous tiltrotor VTOL aircraft designed for versatile operations. It features a unique combination of vertical takeoff and landing capabilities with efficient forward flight, making it suitable for a wide range of missions including surveillance, delivery, and reconnaissance. The aircraft is equipped with state-of-the-art avionics and control systems to ensure precise maneuverability and stability in various flight conditions.",
+    gallery: [
+      `${PUBLIC}/images/all/Vidhyut-Hero.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-3.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-4.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp-Flight.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight3.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight-Comp.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-General.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`
+    ]
+  },
+  {
+    id: 2,
+    name: "Marut",
+    year: "2024",
+    mission: "High payload, mid-air delivery",
+    rank: ["1st National"],
+    coverImage: `${PUBLIC}/images/all/Marut-Hero.jpg`,
+    description: "Marut is engineered for high payload capacity and efficient mid-air delivery operations. This aircraft is optimized for transporting goods and equipment to remote or hard-to-reach locations, making it ideal for disaster relief, medical supply drops, and logistical support. Marut's robust design and advanced flight systems ensure reliable performance even under challenging conditions.",
+    gallery: [
+      `${PUBLIC}/images/all/Marut-Hero.jpg`,
+      `${PUBLIC}/images/all/Marut-1.jpg`,
+      `${PUBLIC}/images/all/Marut-2.jpg`,
+      `${PUBLIC}/images/all/Marut-3.jpg`,
+      `${PUBLIC}/images/all/Marut-4.JPG`,
+      `${PUBLIC}/images/all/Marut-Comp.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Flight.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team (2).jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team3.jpg`,
+      `${PUBLIC}/images/all/Marut-General.jpg`
+    ]
+  },
+  {
+    id: 3,
+    name: "Aquarius",
+    year: "2023",
+    mission: "Water payload delivery & PADA deployment",
+    rank: [],
+    coverImage: `${PUBLIC}/images/all/Aquarius-Hero.jpeg`,
+    description: "Aquarius, our 2023 flagship, was named after the water-bearing constellation — a testament to its design delivering an 11 lb water payload to achieve mission performance. This semi-tapered mid-wing aircraft cruises at 42 ft/s. The Powered Autonomous Delivery Aircraft (PADA) deployed from the primary aircraft provides parts for a fully autonomous Ground Transport Vehicle.",
+    gallery: [
+      `${PUBLIC}/images/all/Aquarius-Hero.jpeg`,
+      `${PUBLIC}/images/all/Aquarius-1.jpg`,
+      `${PUBLIC}/images/all/Aquarius-2.jpg`,
+      `${PUBLIC}/images/all/Aquarius-3.jpg`,
+      `${PUBLIC}/images/all/Aquarius-4.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Award.png`,
+      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`
+    ]
+  },
+  {
+    id: 4,
+    name: "Trident",
+    year: "2022",
+    mission: "Autonomous mid-air deployment & GTV support",
+    rank: ["3rd Globally (Wildfire mitigation mission)"],
+    coverImage: `${PUBLIC}/images/all/Trident-Hero-Team.jpg`,
+    description: "Trident, the 2022 flagship, is an electric mid-wing aircraft with a single motor. It can carry 40 lbs at a cruise speed of 43 ft/s. Its advanced avionics allow for autonomous mid-air deployment of a secondary aircraft equipped with lidar-operated Ground Terrain Vehicle (GTV). The GTV provides ground-level assistance to firefighters. Trident achieved a global ranking of 3rd place.",
+    gallery: [
+      `${PUBLIC}/images/all/Trident-Hero-Team.jpg`,
+      `${PUBLIC}/images/all/Trident-1.jpg`,
+      `${PUBLIC}/images/all/Trident-2.jpg`,
+      `${PUBLIC}/images/all/Trident-3.jpg`,
+      `${PUBLIC}/images/all/Trident-4.jpg`,
+      `${PUBLIC}/images/all/Trident-5.jpg`,
+      `${PUBLIC}/images/all/Trident-Team.jpg`,
+      `${PUBLIC}/images/all/Trident-Awards.jpg`,
+      `${PUBLIC}/images/all/Trident-Awards-2.jpeg`
+    ]
+  },
+  {
+    id: 5,
+    name: "Vulcan",
+    year: "2021",
+    mission: "Creative design — competition-focused",
+    rank: ["5th Globally", "1st in Asia (Design Report)"],
+    coverImage: `${PUBLIC}/images/all/Vulcan-Hero.jpg`,
+    description: "Vulcan is our 2021 flagship designed with a combination of hard work and creativity. Vulcan enabled the team to achieve 1st position in all of Asia as well as a top technical design report ranking. Globally it is ranked 5th, despite the challenges that year due to the COVID-19 pandemic.",
+    gallery: [
+      `${PUBLIC}/images/all/Vulcan-Hero.jpg`,
+      `${PUBLIC}/images/all/Vulcan-2.jpg`
+    ]
+  },
+  {
+    id: 6,
+    name: "Airavat",
+    year: "2020",
+    mission: "High-lift electric, multi-deployment",
+    rank: ["3rd Globally"],
+    coverImage: `${PUBLIC}/images/all/Airavat-Hero.jpeg`,
+    description: "Airavat is the 2020 flagship — an electric motor-propelled, high-wing aircraft with tricycle landing gear, capable of lifting 38 pounds at a cruise velocity of 43 ft/s. The aircraft can autonomously release two colonist delivery aircraft along with multiple supply payloads. It is ranked 3rd globally.",
+    gallery: [
+      `${PUBLIC}/images/all/Airavat-Hero.jpeg`,
+      `${PUBLIC}/images/all/Airavat-Flight.jpg`,
+      `${PUBLIC}/images/all/Airavat-Comp.jpg`,
+      `${PUBLIC}/images/all/Airavat-Comp-2.jpg`,
+      `${PUBLIC}/images/all/Airavat-Render.png`,
+      `${PUBLIC}/images/all/Airavat-Team.jpg`
+    ]
+  },
+  {
+    id: 7,
+    name: "Redbird",
+    year: "2019",
+    mission: "Mars colonization simulation & increased aerodynamics",
+    rank: ["4th Worldwide (Advanced Class, SAE AeroDesign)", "1st Asia-Pacific (Advanced Class)"],
+    coverImage: `${PUBLIC}/images/all/Redbird-Hero-Team.jpg`,
+    description: "Redbird is the 2019 flagship designed to simulate the colonization of Mars. Hoerner wingtips and a lifting-body fuselage increased the aircraft's aerodynamics and payload lifting capacity, leading the team to a worldwide 4th position and defending 1st position in the Asia-Pacific in the Advanced Class category of SAE Aero Design.",
+    gallery: [
+      `${PUBLIC}/images/all/Redbird-Hero-Team.jpg`,
+      `${PUBLIC}/images/all/Redbird-1.jpg`,
+      `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
+      `${PUBLIC}/images/all/Redbird-Award.jpg`,
+      `${PUBLIC}/images/all/Redbird-Team.jpg`
+    ]
+  },
+  {
+    id: 9,
+    name: "Jetaayu",
+    year: "2017",
+    mission: "Weather analysis & thermal imaging (modifiable)",
+    rank: ["7th Overall (SAE EAST AersoDesign)", "3rd Overall (Indian Space Conclave 2017)"],
+    coverImage: `${PUBLIC}/images/all/Jetaayu-Hero.jpeg`,
+    description: "Jetaayu is the 2017 flagship of the Team Assailing Falcons. The aircraft can be modified for weather analysis and thermal imaging. In SAE EAST Aero Design Competition, Jetaayu secured an overall world ranking of 7. It also helped the team secure an overall 3rd ranking in the Indian Space Conclave 2017 competition held by SEDS VIT.",
+    gallery: [
+      `${PUBLIC}/images/all/Jetaayu-Hero.jpeg`,
+      `${PUBLIC}/images/all/Jetaayu-2.jpg`
+    ]
+  },
+  {
+    id: 8,
+    name: "Zephyrus",
+    year: "2018",
+    mission: "Advanced lift & payload drop",
+    rank: ["6th Worldwide (SAE EAST AeroDesign 2018)"],
+    coverImage: `${PUBLIC}/images/all/Zephyrus-Hero.png`,
+    description: "Zephyrus is indeed the majestic advanced class aircraft that definitely lives up to its name - The Greek god of winds. Its improved lift and payload dropping capacity of aircraft helped the team secure worldwide 6th position at the SAE Aero Design East Competition 2018 — the best position in the Asia/Pacific region at the time.",
+    gallery: [
+      `${PUBLIC}/images/all/Zephyrus-Hero.png`,
+      `${PUBLIC}/images/all/Zephyrus-2.jpg`
+    ]
+  }
+];
+
+// =================================================================================
+// 4. GALLERY PAGE (updated categories: Flights, Competition Photos, Events, General)
+// - Team photos and award images have been added into relevant categories.
+// =================================================================================
+export const GALLERY_CATEGORIES = [
+  {
+    name: "Flights",
+    coverImage: `${PUBLIC}/images/all/Vidhyut-Flight.jpg`,
+    photos: [
+      `${PUBLIC}/images/all/Vidhyut-Flight.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Flight3.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Flight.jpg`,
+      `${PUBLIC}/images/all/Airavat-Flight.jpg`,
+      `${PUBLIC}/images/all/Marut-1.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-3.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-4.jpg`,
+      `${PUBLIC}/images/all/Redbird-1.jpg`,
+      // team photos mixed into Flights for lifestyle shots during flights/testing
+      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`
+    ]
+  },
+  {
+    name: "Competition Photos",
+    coverImage: `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
+    photos: [
+      `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
+      `${PUBLIC}/images/all/Marut-Comp.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Flight.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team (2).jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team3.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp2.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Comp-Flight.jpg`,
+      `${PUBLIC}/images/all/Redbird-Award.jpg`,           // award image included in competition set
+      // team shots during competition
+      `${PUBLIC}/images/all/Redbird-Team.jpg`,
+      `${PUBLIC}/images/all/Trident-Team.jpg`
+    ]
+  },
+  {
+    name: "Events",
+    coverImage: `${PUBLIC}/images/all/Events.jpg`,
+    photos: [
+      `${PUBLIC}/images/all/Events.jpg`,
+      `${PUBLIC}/images/all/Events-2.jpg`,
+      `${PUBLIC}/images/all/Events-3.jpg`,
+      `${PUBLIC}/images/all/Redbird-Award.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Award.png`,
+      `${PUBLIC}/images/all/Trident-Awards.jpg`,
+      `${PUBLIC}/images/all/Trident-Awards-2.jpeg`,
+      // team photos and award ceremony shots
+      `${PUBLIC}/images/all/Team-India.jpg`,
+      `${PUBLIC}/images/all/Redbird-Team.jpg`
+    ]
+  },
+  {
+    name: "Team",
+    coverImage: `${PUBLIC}/images/all/Team-India.jpg`,
+    photos: [
+      `${PUBLIC}/images/all/Team-India.jpg`,
+      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
+      `${PUBLIC}/images/all/Trident-Team.jpg`,
+      `${PUBLIC}/images/all/Redbird-Team.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`,
+      `${PUBLIC}/images/all/Airavat-Team.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Team.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Team-3.jpg`,
+      `${PUBLIC}/images/all/Carvao-Team.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team (2).jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team.jpg`,
+      `${PUBLIC}/images/all/Marut-Comp-Team3.jpg`,
+      `${PUBLIC}/images/all/Nautilus-Hero-Team.jpg`,
+      `${PUBLIC}/images/all/Redbird-Hero-Team.jpg`,
+      `${PUBLIC}/images/all/Trident-Hero-Team.jpg`,
+      `${PUBLIC}/images/all/Trident-Team-2.jpg`,
+      `${PUBLIC}/images/all/Trident-Team-Ecents.jpg`,
+      `${PUBLIC}/images/all/Aquarius-Team-2.jpg`
+    ]
+
+  },
+  {
+    name: "General",
+    coverImage: `${PUBLIC}/images/all/General2.jpg`,
+    photos: [
+      `${PUBLIC}/images/all/General2.jpg`,
+      `${PUBLIC}/images/all/General3.jpg`,
+      `${PUBLIC}/images/all/General4.jpg`,
+      `${PUBLIC}/images/all/General5.jpg`
+    ]
+  }
+];
+
+// =================================================================================
+// 5. CONTACT US PAGE
+// =================================================================================
+export const CONTACT_CONFIG = {
+  formspreeId: "YOUR_FORMSPREE_ID_HERE", // Sign up at formspree.io to get this ID
+  introText: "Interested in sponsoring or joining? Let us know."
+};
