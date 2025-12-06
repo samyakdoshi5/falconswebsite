@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/falconswebsite/static/css/main.d35ae2c2.css",
+    "main.js": "/falconswebsite/static/js/main.66120b28.js",
+    "index.html": "/falconswebsite/index.html",
+    "main.d35ae2c2.css.map": "/falconswebsite/static/css/main.d35ae2c2.css.map",
+    "main.66120b28.js.map": "/falconswebsite/static/js/main.66120b28.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d35ae2c2.css",
+    "static/js/main.66120b28.js"
+  ]
+}

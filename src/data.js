@@ -285,9 +285,9 @@ export const GALLERY_CATEGORIES = [
       `${PUBLIC}/images/all/Events-2.jpg`,
       `${PUBLIC}/images/all/Events-3.jpg`,
       `${PUBLIC}/images/all/Trident-Team-Events.jpg`,
-      `${PUBLIC}/images/all/Events-AC25-1.JPG`,
+      `${PUBLIC}/images/all/Events-AC25-1.jpg`,
       `${PUBLIC}/images/all/Events-AC25-2.jpg`,
-      `${PUBLIC}/images/all/Events-AC24.JPG`,
+      `${PUBLIC}/images/all/Events-AC24.jpg`,
       `${PUBLIC}/images/all/Events-ID.jpg`
     ]
   },

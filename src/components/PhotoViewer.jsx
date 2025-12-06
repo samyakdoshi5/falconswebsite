@@ -1,42 +1,220 @@
+// src/components/PhotoViewer.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { deriveVariants } from '../utils/imageVariants';
 
-const PhotoViewer = ({ photos, initialIndex, onClose }) => {
+const makeVariants = (photo) => {
+  if (!photo) return null;
+  if (typeof photo === 'string') return deriveVariants(photo);
+  if (photo.variants) return photo.variants;
+  return photo;
+};
+
+const buildSrcSet = (variants, pref = 'webp') => {
+  if (!variants) return null;
+  if (pref === 'webp') {
+    const list = [variants.webp_400, variants.webp_800, variants.webp_1600].filter(Boolean)
+      .map((u, i) => `${encodeURI(u)} ${[400, 800, 1600][i]}w`);
+    return list.length ? list.join(', ') : null;
+  } else {
+    const list = [variants.jpg_400, variants.jpg_800, variants.jpg_1600].filter(Boolean)
+      .map((u, i) => `${encodeURI(u)} ${[400, 800, 1600][i]}w`);
+    return list.length ? list.join(', ') : null;
+  }
+};
+
+const choose1600 = (variants) => {
+  if (!variants) return null;
+  return variants.webp_1600 || variants.jpg_1600 || variants.webp_800 || variants.jpg_800 || variants.full || null;
+};
+
+const chooseFull = (variants) => {
+  if (!variants) return null;
+  return variants.full || variants.jpg_1600 || variants.webp_1600 || variants.jpg_800 || variants.webp_800 || null;
+};
+
+const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }) => {
   const [currentIndex, setCurrentIndex] = React.useState(initialIndex);
+  const [fullLoadedSrc, setFullLoadedSrc] = React.useState(null); // when loaded, show this directly
+  const len = photos.length;
 
-  const nextPhoto = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev + 1) % photos.length);
-  };
+  React.useEffect(() => setCurrentIndex(initialIndex), [initialIndex]);
 
-  const prevPhoto = (e) => {
-    e.stopPropagation();
-    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
-  };
+  // when index or photos change: reset fullLoadedSrc so we start by showing 1600 again
+  React.useEffect(() => {
+    setFullLoadedSrc(null);
+  }, [currentIndex, photos]);
 
+  // Start background load of full-res for current image and swap to it when ready.
+  React.useEffect(() => {
+    if (!photos || len === 0) return;
+    const variants = makeVariants(photos[currentIndex]);
+    const initialSrc = choose1600(variants);
+    const fullSrc = chooseFull(variants);
+
+    // if there's no full or it's the same as initial 1600 -> nothing to do
+    if (!fullSrc || fullSrc === initialSrc) {
+      // ensure we're not holding a stale fullLoadedSrc
+      // if fullSrc equals initialSrc we can set it immediately (no extra download)
+      setFullLoadedSrc(fullSrc ? encodeURI(fullSrc) : null);
+      return;
+    }
+
+    let bg = new Image();
+    let mounted = true;
+    bg.onload = () => {
+      if (!mounted) return;
+      // set state to the encoded full url - triggers render to plain <img src={full}>
+      setFullLoadedSrc(encodeURI(fullSrc));
+    };
+    bg.onerror = () => {
+      // fail silently; keep showing 1600
+    };
+    // start background load
+    bg.src = encodeURI(fullSrc);
+
+    return () => {
+      mounted = false;
+      if (bg) {
+        try { bg.onload = null; bg.onerror = null; bg.src = ''; } catch (e) {}
+      }
+    };
+  }, [currentIndex, photos, len]);
+
+  // Preload neighbor full images in background (same approach, but don't set state)
+  React.useEffect(() => {
+    if (!photos || len === 0) return;
+    const prev = (currentIndex - 1 + len) % len;
+    const next = (currentIndex + 1) % len;
+    const indices = [prev, next];
+
+    const loaders = indices.map((i) => {
+      const v = makeVariants(photos[i]);
+      const url = chooseFull(v) || choose1600(v);
+      if (!url) return null;
+      const img = new Image();
+      img.src = encodeURI(url);
+      return img;
+    }).filter(Boolean);
+
+    return () => loaders.forEach(i => { try { i.src = ''; } catch (e) {} });
+  }, [currentIndex, photos, len]);
+
+  // keyboard nav
+  React.useEffect(() => {
+    const onKey = (ev) => {
+      if (ev.key === 'Escape') return onClose?.();
+      if (ev.key === 'ArrowRight') return setCurrentIndex((p) => (p + 1) % len);
+      if (ev.key === 'ArrowLeft') return setCurrentIndex((p) => (p - 1 + len) % len);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [len, onClose]);
+
+  if (len === 0) return null;
+
+  const prevPhoto = (e) => { e.stopPropagation(); setCurrentIndex((p) => (p - 1 + len) % len); };
+  const nextPhoto = (e) => { e.stopPropagation(); setCurrentIndex((p) => (p + 1) % len); };
+
+  const currentVars = makeVariants(photos[currentIndex]);
+  const webpSrcSet = buildSrcSet(currentVars, 'webp');
+  const jpgSrcSet = buildSrcSet(currentVars, 'jpg');
+  const initialDisplay = choose1600(currentVars) || chooseFull(currentVars) || '';
+
+  // We'll crossfade between the 1600 (rendered via <picture>) and the full (<img>) using opacity transition.
+  // fullLoadedSrc === null : show picture (1600). When fullLoadedSrc is set : show plain <img src={fullLoadedSrc}>
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       className="fixed inset-0 z-[70] bg-black/95 flex items-center justify-center"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Image viewer, image ${currentIndex + 1} of ${len}`}
     >
-      <button onClick={onClose} className="absolute top-6 right-6 text-white hover:text-red-500">
+      <button
+        onClick={(e) => { e.stopPropagation(); onClose?.(); }}
+        className="absolute top-6 right-6 text-white hover:text-red-500"
+        aria-label="Close"
+      >
         <X size={40} />
       </button>
-      <button onClick={prevPhoto} className="absolute left-4 text-white hover:text-tech-accent p-2">
+
+      <button
+        onClick={prevPhoto}
+        className="absolute left-4 text-white hover:text-tech-accent p-2"
+        aria-label="Previous image"
+      >
         <ChevronLeft size={48} />
       </button>
-      <img 
-        src={photos[currentIndex]} 
-        alt="Full View" 
-        className="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-2xl shadow-tech-accent/20"
-        onClick={(e) => e.stopPropagation()} 
-      />
-      <button onClick={nextPhoto} className="absolute right-4 text-white hover:text-tech-accent p-2">
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          maxWidth: '90vw',
+          maxHeight: '90vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+        }}
+      >
+        {/* base layer: 1600 via picture. it's visible while fullLoadedSrc is null; fades out when full is ready */}
+        <div
+          style={{
+            transition: 'opacity 320ms ease',
+            opacity: fullLoadedSrc ? 0 : 1,
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+          aria-hidden={!!fullLoadedSrc}
+        >
+          <picture>
+            {webpSrcSet && <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />}
+            {jpgSrcSet && <source type="image/jpeg" srcSet={jpgSrcSet} sizes={sizes} />}
+            <img
+              src={encodeURI(initialDisplay)}
+              alt={`Photo ${currentIndex + 1} of ${len}`}
+              style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
+              loading="eager"
+              decoding="async"
+            />
+          </picture>
+        </div>
+
+        {/* top layer: full image — only rendered when available */}
+        {fullLoadedSrc && (
+          <img
+            src={fullLoadedSrc}
+            alt={`Photo ${currentIndex + 1} (full)`}
+            style={{
+              maxWidth: '90vw',
+              maxHeight: '90vh',
+              objectFit: 'contain',
+              display: 'block',
+              transition: 'opacity 320ms ease',
+              opacity: 1,
+              position: 'relative',
+            }}
+            loading="eager"
+            decoding="async"
+          />
+        )}
+      </div>
+
+      <button
+        onClick={nextPhoto}
+        className="absolute right-4 text-white hover:text-tech-accent p-2"
+        aria-label="Next image"
+      >
         <ChevronRight size={48} />
       </button>
     </motion.div>
   );
 };
+
 export default PhotoViewer;
