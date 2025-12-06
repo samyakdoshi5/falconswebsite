@@ -26,37 +26,38 @@ const buildSrcSet = (variants, pref = 'webp') => {
 
 const choose1600 = (variants) => {
   if (!variants) return null;
+  // prefer webp_1600 then jpg_1600, then fallbacks to 800 if needed
   return variants.webp_1600 || variants.jpg_1600 || variants.webp_800 || variants.jpg_800 || variants.full || null;
 };
 
 const chooseFull = (variants) => {
   if (!variants) return null;
+  // full is the original image; if absent, fallback to best available
   return variants.full || variants.jpg_1600 || variants.webp_1600 || variants.jpg_800 || variants.webp_800 || null;
 };
 
 const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }) => {
   const [currentIndex, setCurrentIndex] = React.useState(initialIndex);
-  const [fullLoadedSrc, setFullLoadedSrc] = React.useState(null); // when loaded, show this directly
+  const [fullLoadedSrc, setFullLoadedSrc] = React.useState(null); // encoded URL of full when loaded
   const len = photos.length;
 
+  // sync with parent initialIndex
   React.useEffect(() => setCurrentIndex(initialIndex), [initialIndex]);
 
-  // when index or photos change: reset fullLoadedSrc so we start by showing 1600 again
+  // reset fullLoadedSrc when index or photos change (so we show 1600 again)
   React.useEffect(() => {
     setFullLoadedSrc(null);
   }, [currentIndex, photos]);
 
-  // Start background load of full-res for current image and swap to it when ready.
+  // Start background load of full-res for the current image and set state on load.
   React.useEffect(() => {
     if (!photos || len === 0) return;
     const variants = makeVariants(photos[currentIndex]);
-    const initialSrc = choose1600(variants);
-    const fullSrc = chooseFull(variants);
+    const initialSrc = choose1600(variants); // what we display immediately via picture
+    const fullSrc = chooseFull(variants); // what we want to swap to once ready
 
-    // if there's no full or it's the same as initial 1600 -> nothing to do
+    // if no full or identical to initial, set fullLoadedSrc to initial (no bg load)
     if (!fullSrc || fullSrc === initialSrc) {
-      // ensure we're not holding a stale fullLoadedSrc
-      // if fullSrc equals initialSrc we can set it immediately (no extra download)
       setFullLoadedSrc(fullSrc ? encodeURI(fullSrc) : null);
       return;
     }
@@ -65,13 +66,12 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
     let mounted = true;
     bg.onload = () => {
       if (!mounted) return;
-      // set state to the encoded full url - triggers render to plain <img src={full}>
+      // set to encoded full url so rendered <img> uses exactly that string
       setFullLoadedSrc(encodeURI(fullSrc));
     };
     bg.onerror = () => {
-      // fail silently; keep showing 1600
+      // fail silently and keep showing 1600
     };
-    // start background load
     bg.src = encodeURI(fullSrc);
 
     return () => {
@@ -82,26 +82,36 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
     };
   }, [currentIndex, photos, len]);
 
-  // Preload neighbor full images in background (same approach, but don't set state)
+  // Preload LEFT & RIGHT 1600p ONLY (webp_1600 -> jpg_1600 -> 800 fallbacks). Do NOT preload neighbor full-res.
   React.useEffect(() => {
     if (!photos || len === 0) return;
+
     const prev = (currentIndex - 1 + len) % len;
     const next = (currentIndex + 1) % len;
     const indices = [prev, next];
 
     const loaders = indices.map((i) => {
       const v = makeVariants(photos[i]);
-      const url = chooseFull(v) || choose1600(v);
+      const url =
+        v?.webp_1600 ||
+        v?.jpg_1600 ||
+        v?.webp_800 ||
+        v?.jpg_800 ||
+        null;
+
       if (!url) return null;
       const img = new Image();
       img.src = encodeURI(url);
       return img;
     }).filter(Boolean);
 
-    return () => loaders.forEach(i => { try { i.src = ''; } catch (e) {} });
+    return () =>
+      loaders.forEach((img) => {
+        try { img.src = ''; } catch (e) {}
+      });
   }, [currentIndex, photos, len]);
 
-  // keyboard nav
+  // keyboard navigation
   React.useEffect(() => {
     const onKey = (ev) => {
       if (ev.key === 'Escape') return onClose?.();
@@ -122,8 +132,6 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
   const jpgSrcSet = buildSrcSet(currentVars, 'jpg');
   const initialDisplay = choose1600(currentVars) || chooseFull(currentVars) || '';
 
-  // We'll crossfade between the 1600 (rendered via <picture>) and the full (<img>) using opacity transition.
-  // fullLoadedSrc === null : show picture (1600). When fullLoadedSrc is set : show plain <img src={fullLoadedSrc}>
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -160,7 +168,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
           position: 'relative',
         }}
       >
-        {/* base layer: 1600 via picture. it's visible while fullLoadedSrc is null; fades out when full is ready */}
+        {/* Base layer: 1600 via <picture>. Visible while fullLoadedSrc is null; fades out when full is ready */}
         <div
           style={{
             transition: 'opacity 320ms ease',
@@ -182,11 +190,12 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
               style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
               loading="eager"
               decoding="async"
+              fetchPriority="high"
             />
           </picture>
         </div>
 
-        {/* top layer: full image — only rendered when available */}
+        {/* Top layer: full image — only rendered when available; crossfades in */}
         {fullLoadedSrc && (
           <img
             src={fullLoadedSrc}
@@ -202,6 +211,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
             }}
             loading="eager"
             decoding="async"
+            fetchPriority="high"
           />
         )}
       </div>
