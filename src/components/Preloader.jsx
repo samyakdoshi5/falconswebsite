@@ -10,7 +10,7 @@ export default function Preloader({
         TEAM_INFO.smalllogo,
         HERO_DATA.posterImage,
         TEAM_INFO.gif,
-        HERO_DATA.backgroundImage,
+        HERO_DATA.posterImage,
         ...SPONSORS_LOGOS.map((s) => s.logoUrl),
         ...AIRCRAFT_DATA.map((a) => a.coverImage),
         ...GALLERY_CATEGORIES.flatMap((c) => c.images),
