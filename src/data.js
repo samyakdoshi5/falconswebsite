@@ -117,7 +117,7 @@ export const AIRCRAFT_DATA = [
     mission: "High payload, mid-air delivery",
     rank: ["6th Design Report", "13th Flight Demonstration Readiness Review", "2nd (tied) Flight Performance", "9th Overall"],
     coverImage: `${PUBLIC}/images/all/Marut-Hero.jpg`,
-    description: "Marut, our 2024 flagship, is a high-performance autonomous UAV that earned the title of #1 in Asia. With a commanding 10-ft wingspan and the ability to carry 13 lbs of water, Marut is purpose-built for wildfire-oriented firefighting missions. Engineered for precision and reliability, it features a specialized deployment system capable of releasing an autonomous powered delta-wing vehicle mid-air to extend mission reach and responsiveness. Marut stands as a testament to our commitment to pioneering bold, mission-driven UAV solutions.",
+    description: "Marut, our 2024 flagship, is a high-performance blended-wing aircraft that earned the title of #1 in Asia. With a commanding 10-ft wingspan and the ability to carry 13 lbs of water, Marut is purpose-built for wildfire-oriented firefighting missions. Engineered for precision and reliability, it features a specialized deployment system capable of releasing an autonomous powered delta-wing vehicle mid-air to extend mission reach and responsiveness. Marut stands as a testament to our commitment to pioneering bold, mission-driven UAV solutions.",
     gallery: [
       `${PUBLIC}/images/all/Marut-Hero.jpg`,
       `${PUBLIC}/images/all/Marut-1.jpg`,
