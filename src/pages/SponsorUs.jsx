@@ -1,8 +1,8 @@
 // SponsorUs.jsx
-import React from 'react';
+// import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Mail, Download } from 'lucide-react';
+import { Download, LucideLink } from 'lucide-react';
 import { HERO_DATA, SPONSORS_LOGOS, PERKS, WHAT_WE_PROVIDE, WHAT_WE_EXPECT } from '../data.js';
 
 // Small Reveal helper consistent with Home.jsx
@@ -32,7 +32,7 @@ export default function SponsorUs() {
                     <Reveal delay={0} duration={0.7}>
                         {/* Added 'text-center md:text-left' and 'mx-auto md:mx-0' to center content block on mobile */}
                         <div className="text-center md:text-left mx-auto md:mx-0">
-                            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-brand-highlight to-tech-accent bg-clip-text text-transparent">Sponsor <span className="text-white">Us</span></h1>
+                            <h1 className="text-4xl md:text-5xl font-bold"><span className="text-tech-gold">Sponsor</span> <span className="text-white">Us</span></h1>
                             <br />
                             {/* Added 'mx-auto md:mx-0' to center the paragraph (which has max-w) on mobile */}
                             <p className="text-slate-300 mb-6s max-w-xl mx-auto md:mx-0">
@@ -55,7 +55,7 @@ export default function SponsorUs() {
                                     to="/contact"
                                     className="inline-flex items-center gap-2 border border-slate-700 py-3 px-6 rounded-full font-semibold hover:bg-white/5 transition"
                                 >
-                                    <Mail size={18} /> Contact
+                                    <LucideLink size={18} /> Contact
                                 </Link>
                             </div>
 

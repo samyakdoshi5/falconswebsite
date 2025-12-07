@@ -21,7 +21,7 @@ const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
   return (
     <motion.div ref={ref} variants={variants} initial="hidden" animate={'visible'}>
       {children}
-    </motion.div>
+    </motion.div> 
   );
 };
 
