@@ -144,6 +144,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         onClick={(e) => { e.stopPropagation(); onClose?.(); }}
         className="absolute top-6 right-6 text-white hover:text-red-500"
         aria-label="Close"
+        style={{ zIndex: 60 }}
       >
         <X size={40} />
       </button>
@@ -152,6 +153,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         onClick={prevPhoto}
         className="absolute left-4 text-white hover:text-tech-accent p-2"
         aria-label="Previous image"
+        style={{ zIndex: 50 }}
       >
         <ChevronLeft size={48} />
       </button>
@@ -170,13 +172,15 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         {/* Base layer: 1600 via <picture>. Visible while fullLoadedSrc is null; fades out when full is ready */}
         <div
           style={{
-            transition: 'opacity 320ms ease',
+            transition: 'opacity 500ms ease',
             opacity: fullLoadedSrc ? 0 : 1,
             position: 'absolute',
             inset: 0,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            // IMPORTANT: don't let the hidden base layer capture pointer events once the full image is ready
+            pointerEvents: fullLoadedSrc ? 'none' : 'auto',
           }}
           aria-hidden={!!fullLoadedSrc}
         >
@@ -185,13 +189,12 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
             {jpgSrcSet && <source type="image/jpeg" srcSet={jpgSrcSet} sizes={sizes} />}
             <img
               src={encodeURI(initialDisplay)}
-              // ACCESSIBILITY FIX: Changed 'Photo' to 'View' to resolve 'img-redundant-alt' warning
               alt={`View ${currentIndex + 1} of ${len}`} 
               style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
               loading="eager"
               decoding="async"
-              // WARNING FIX: Changed 'fetchPriority' (camelCase) to 'fetchpriority' (lowercase)
-              fetchpriority="high" 
+              // keep fetchpriority lowercase
+              fetchpriority="high"
             />
           </picture>
         </div>
@@ -200,21 +203,21 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         {fullLoadedSrc && (
           <img
             src={fullLoadedSrc}
-            // ACCESSIBILITY FIX: Changed 'Photo' to 'View' to resolve 'img-redundant-alt' warning
             alt={`View ${currentIndex + 1} (full)`}
             style={{
               maxWidth: '90vw',
               maxHeight: '90vh',
               objectFit: 'contain',
               display: 'block',
-              transition: 'opacity 320ms ease',
+              transition: 'opacity 500ms ease',
               opacity: 1,
               position: 'relative',
+              zIndex: 20,              // image sits below controls
+              pointerEvents: 'auto',   // image can still be interacted with if needed
             }}
             loading="eager"
             decoding="async"
-            // WARNING FIX: Changed 'fetchPriority' (camelCase) to 'fetchpriority' (lowercase)
-            fetchpriority="high" 
+            fetchpriority="high"
           />
         )}
       </div>
@@ -223,6 +226,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         onClick={nextPhoto}
         className="absolute right-4 text-white hover:text-tech-accent p-2"
         aria-label="Next image"
+        style={{ zIndex: 50 }}
       >
         <ChevronRight size={48} />
       </button>
