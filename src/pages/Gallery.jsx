@@ -1,11 +1,29 @@
-// src/pages/Gallery.jsx  (replace your existing file contents with this or patch accordingly)
+// src/pages/Gallery.jsx (updated with Framer Motion animations)
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import { X } from 'lucide-react';
 import PhotoViewer from '../components/PhotoViewer';
 import { GALLERY_CATEGORIES } from '../data';
 import LazyImage from '../components/LazyImage';
 import { deriveVariants } from '../utils/imageVariants';
+
+// === Reveal helper (Copied from Home.jsx for consistent animation) ===
+const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
+  const ref = React.useRef(null);
+  // const isInView = useInView(ref, { once: true, amount });
+
+  const variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration, delay } },
+  };
+
+  return (
+    <motion.div ref={ref} variants={variants} initial="hidden" animate={'visible'}>
+      {children}
+    </motion.div>
+  );
+};
 
 // Gallery page
 const Gallery = () => {
@@ -20,21 +38,29 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen pt-24 pb-12 px-6 container mx-auto">
+      {/* Header - Now animates immediately on mount */}
       <div className="mb-12 text-center py-6 relative">
-        <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-64 h-64 pointer-events-none" />
-        <h1 className="text-4xl md:text-5xl font-bold text-tech-gold">Team Gallery</h1>
-        <p className="text-slate-400 mt-2">Moments captured on our journey.</p>
+        <Reveal
+          delay={0.1}
+          duration={0.6}
+        >
+          <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 w-64 h-64 pointer-events-none" />
+          <h1 className="text-4xl md:text-5xl font-bold text-tech-gold">Team Gallery</h1>
+          <p className="text-slate-400 mt-2">Moments captured on our journey.</p>
+        </Reveal>
       </div>
 
+      {/* Grid of gallery categories - Animates immediately on mount with staggering delay */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {GALLERY_CATEGORIES.map((cat, idx) => {
           const coverVars = deriveVariants(cat.coverImage);
           return (
+            <Reveal key={idx} duration={0.5} delay={0.1 * idx} amount={0.2}>
             <motion.div
-              key={idx}
               whileHover={{ scale: 1.03 }}
               className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[16/9]"
               onClick={() => setSelectedCategory(cat)}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
             >
               {/* Cover image now lazy-loaded */}
               <LazyImage
@@ -55,6 +81,7 @@ const Gallery = () => {
 
               <div className="absolute left-0 right-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-tech-gold to-transparent opacity-90" />
             </motion.div>
+            </Reveal>
           );
         })}
       </div>
@@ -99,8 +126,9 @@ const Gallery = () => {
                     {selectedCategory.photos.map((img, i) => {
                       const vars = deriveVariants(img);
                       return (
-                        <button
+                        <motion.button
                           key={i}
+                          whileHover={{ scale: 1.05 }} // Added hover animation for gallery images
                           onClick={() =>
                             setViewerData({
                               photos: selectedCategory.photos, // original string paths
@@ -121,7 +149,7 @@ const Gallery = () => {
                           <div className="absolute inset-0 pointer-events-none rounded-lg opacity-0 group-hover:opacity-100 transition">
                             <div className="absolute inset-0 border-2 rounded-lg border-tech-gold/30 shadow-[0_8px_30px_-10px_rgba(227,175,100,0.25)]" />
                           </div>
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>

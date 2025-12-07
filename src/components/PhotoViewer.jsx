@@ -1,4 +1,3 @@
-// src/components/PhotoViewer.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -186,11 +185,13 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
             {jpgSrcSet && <source type="image/jpeg" srcSet={jpgSrcSet} sizes={sizes} />}
             <img
               src={encodeURI(initialDisplay)}
-              alt={`Photo ${currentIndex + 1} of ${len}`}
+              // ACCESSIBILITY FIX: Changed 'Photo' to 'View' to resolve 'img-redundant-alt' warning
+              alt={`View ${currentIndex + 1} of ${len}`} 
               style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
               loading="eager"
               decoding="async"
-              fetchPriority="high"
+              // WARNING FIX: Changed 'fetchPriority' (camelCase) to 'fetchpriority' (lowercase)
+              fetchpriority="high" 
             />
           </picture>
         </div>
@@ -199,7 +200,8 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
         {fullLoadedSrc && (
           <img
             src={fullLoadedSrc}
-            alt={`Photo ${currentIndex + 1} (full)`}
+            // ACCESSIBILITY FIX: Changed 'Photo' to 'View' to resolve 'img-redundant-alt' warning
+            alt={`View ${currentIndex + 1} (full)`}
             style={{
               maxWidth: '90vw',
               maxHeight: '90vh',
@@ -211,7 +213,8 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
             }}
             loading="eager"
             decoding="async"
-            fetchPriority="high"
+            // WARNING FIX: Changed 'fetchPriority' (camelCase) to 'fetchpriority' (lowercase)
+            fetchpriority="high" 
           />
         )}
       </div>

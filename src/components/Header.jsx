@@ -8,7 +8,9 @@ const NAV_LINKS = [
   { name: "Home", path: "/" },
   { name: "Flagships", path: "/flagships" },
   { name: "Gallery", path: "/gallery" },
-  { name: "Contact Us", path: "/contact" },
+  { name: "Sponsor Us", path: "/sponsor-us" },
+  { name: "Contact Us", path: "/contact" }
+  
 ];
 
 const backdropVariant = {

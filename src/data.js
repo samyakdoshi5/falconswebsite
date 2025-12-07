@@ -1,5 +1,5 @@
 // src/data.js
-import { PenTool, Plane, Cpu, BarChart } from 'lucide-react';
+import { PenTool, Plane, Cpu, BarChart, Layers, Gift, Wrench } from 'lucide-react';
 
 const PUBLIC = process.env.PUBLIC_URL || "";
 
@@ -34,7 +34,8 @@ export const HERO_DATA = {
   titleHighlight: "FLIGHT",
   subtitle: "Designing, building, and flying the next generation of UAVs.",
   brochureLink: `${PUBLIC}/AssailingFalcons25-Brochure.pdf`,
-  buttonText: "Download Brochure"
+  buttonText: "Support Us",
+  teamPhoto: `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`
 };
 
 export const ABOUT_DATA = {
@@ -337,3 +338,28 @@ export const GALLERY_CATEGORIES = [
 export const CONTACT_CONFIG = {
   introText: "Interested in sponsoring or joining? Let us know."
 };
+
+
+// =================================================================================
+// 6. SPONSOR US PAGE
+// =================================================================================
+export const PERKS = [
+    { icon: Cpu, title: 'Technical Collaboration', desc: 'Component donations, dev boards, electronics and hardware.' },
+    { icon: Layers, title: 'Software & Licenses', desc: 'Software licenses, compute credits, SDKs.' },
+    { icon: Gift, title: 'Monetary Support', desc: 'Funding for projects, discounts on components and services.' },
+    { icon: Wrench, title: 'Mentorship & Access', desc: 'Office hours, guest lectures, recruitment pipeline.' },
+];
+
+export const WHAT_WE_PROVIDE = [
+    'Brand visibility across competitions, social and campus events',
+    'Technical reports, demo day, post-campaign analytics',
+    'Access to student talent for internships & recruitment',
+    'Brand placement on banners, team apparel, website and social media'
+];
+
+export const WHAT_WE_EXPECT = [
+    'Clear deliverables and timeline for in-kind donations',
+    'Logo and brand assets (SVG, color guide) for marketing purposes',
+    'Technical documentation for hardware/software donations',
+    'Compliance with safety & export rules for restricted components'
+];

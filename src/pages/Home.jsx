@@ -1,7 +1,8 @@
 // Home.jsx
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Download, Users, Target } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Users, Target } from 'lucide-react';
 import {
   HERO_DATA,
   ABOUT_DATA,
@@ -241,12 +242,12 @@ const Home = () => {
         <div className="absolute inset-0 bg-black/30 mix-blend-multiply pointer-events-none z-40" />
 
         {/* 🎨 New element: Gradient blur at the bottom for smooth scroll transition */}
-        <div  
+        <div
           className="absolute bottom-0 inset-x-0 h-12 z-[45] pointer-events-none"
           style={{
             backgroundImage: 'linear-gradient(to top, var(--global-background-color, #0f172a) 10%, transparent 100%)',
-          }}s
-        />  
+          }} s
+        />
 
         {/* Hero Content - moved *under* the header by lowering z-index and adding top padding */}
         <div className="relative z-[46] text-center px-4 max-w-4xl pt-20 md:pt-24">
@@ -264,13 +265,12 @@ const Home = () => {
 
           <p className="text-xl text-gray-300 mb-8 font-light">{HERO_DATA.subtitle}</p>
 
-          <a
-            href={HERO_DATA.brochureLink}
-            download
-            className="inline-flex items-center bg-gradient-to-r from-tech-accent to-brand-highlight text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-white/10"
+          <Link
+            to="/sponsor-us"
+            className="inline-flex items-center text-xl bg-gradient-to-r from-tech-accent to-brand-highlight text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-white/10"
           >
-            <Download className="mr-2" size={20} /> {HERO_DATA.buttonText}
-          </a>
+            {HERO_DATA.buttonText}
+          </Link>
         </div>
       </section>
 

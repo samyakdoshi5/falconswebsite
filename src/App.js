@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Flagships from "./pages/Flagships";
 import Gallery from "./pages/Gallery";
 import ContactUs from "./pages/ContactUs";
+import SponsorUs from "./pages/SponsorUs";
 import Preloader from "./components/Preloader";
 
 import { useEffect } from "react";
@@ -38,7 +39,7 @@ function assetsForPath(pathname) {
       return [
         TEAM_INFO.logo,
         TEAM_INFO.smalllogo,
-        HERO_DATA.backgroundImage,
+        HERO_DATA.posterImage,
         ...SPONSORS_LOGOS.map((s) => s.logoUrl),
       ];
     case "/flagships":
@@ -72,6 +73,7 @@ function AppWrapper() {
             <Route path="/flagships" element={<Flagships />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/sponsor-us" element={<SponsorUs />} />
           </Routes>
         </main>
         <Footer />
