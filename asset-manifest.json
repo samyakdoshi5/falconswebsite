@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/falconswebsite/static/css/main.83395a5a.css",
-    "main.js": "/falconswebsite/static/js/main.88100438.js",
-    "index.html": "/falconswebsite/index.html",
-    "main.83395a5a.css.map": "/falconswebsite/static/css/main.83395a5a.css.map",
-    "main.88100438.js.map": "/falconswebsite/static/js/main.88100438.js.map"
+    "main.css": "/static/css/main.83395a5a.css",
+    "main.js": "/static/js/main.76301ac2.js",
+    "index.html": "/index.html",
+    "main.83395a5a.css.map": "/static/css/main.83395a5a.css.map",
+    "main.76301ac2.js.map": "/static/js/main.76301ac2.js.map"
   },
   "entrypoints": [
     "static/css/main.83395a5a.css",
-    "static/js/main.88100438.js"
+    "static/js/main.76301ac2.js"
   ]
 }
