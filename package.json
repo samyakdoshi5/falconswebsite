@@ -1,7 +1,7 @@
 {
   "name": "falcons-website",
   "version": "0.1.0",
-  "homepage": "https://samyakdoshi5.github.io/falconswebsite",
+  "homepage": "https://assailingfalcons.in",
   "private": true,
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
