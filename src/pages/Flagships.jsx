@@ -161,7 +161,7 @@ const Flagships = () => {
                   {selectedCraft.rank?.length > 0 && (
                     <div className="mb-6">
                       <h3 className="text-white text-xl font-bold mb-2">
-                        <span className="text-tech-gold mr-2">◉</span> Key Rankings
+                        <span className="text-tech-gold mr-2">◉</span> Key Rankings (SAE AeroDesign)
                       </h3>
                       <hr className="border-slate-700 mb-4" />
                       <ul className="list-disc list-inside text-slate-300 text-base space-y-2">

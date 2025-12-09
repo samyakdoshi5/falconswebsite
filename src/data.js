@@ -35,7 +35,7 @@ export const HERO_DATA = {
   subtitle: "Designing, building, and flying the next generation of UAVs.",
   brochureLink: `${PUBLIC}/AssailingFalcons25-Brochure.pdf`,
   buttonText: "Support Us",
-  teamPhoto: `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`
+  teamPhoto: `${PUBLIC}/images/all/Team-Photo.jpg`
 };
 
 export const ABOUT_DATA = {
