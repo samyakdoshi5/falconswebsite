@@ -237,7 +237,9 @@ export const AIRCRAFT_DATA = [
     description: "Jetaayu is the 2017 flagship of Team Assailing Falcons. The aircraft can be modified for weather analysis and thermal imaging. In SAE EAST Aero Design Competition, Jetaayu secured an overall world ranking of 7. It also helped the team secure an overall 3rd ranking in the Indian Space Conclave 2017 competition held by SEDS VIT.",
     gallery: [
       `${PUBLIC}/images/all/Jetaayu-Hero.jpeg`,
-      `${PUBLIC}/images/all/Jetaayu-2.jpg`
+      `${PUBLIC}/images/all/Jetaayu-2.jpg`,
+      `${PUBLIC}/images/all/Jetaayu-Team.jpg`,
+      `${PUBLIC}/images/all/Jetaayu-Flight.jpg`
     ]
   }
 ];
@@ -258,6 +260,7 @@ export const GALLERY_CATEGORIES = [
       `${PUBLIC}/images/all/Marut-Comp-Flight.jpg`,
       `${PUBLIC}/images/all/Airavat-Flight.jpg`,
       `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
+      `${PUBLIC}/images/all/Jetaayu-Flight.jpg`
     ]
   },
   {
@@ -296,7 +299,6 @@ export const GALLERY_CATEGORIES = [
     name: "Team",
     coverImage: `${PUBLIC}/images/all/Team-India.jpg`,
     photos: [
-      `${PUBLIC}/images/all/Team-India.jpg`,
       `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
       `${PUBLIC}/images/all/Marut-Comp-Team3.jpg`,
       `${PUBLIC}/images/all/Aquarius-Team.jpg`,
@@ -304,8 +306,10 @@ export const GALLERY_CATEGORIES = [
       `${PUBLIC}/images/all/Airavat-Team.jpg`,
       `${PUBLIC}/images/all/Redbird-Team.jpg`,
       `${PUBLIC}/images/all/Zephyrus-Team.jpg`,
+      `${PUBLIC}/images/all/Jetaayu-Team.jpg`,
       `${PUBLIC}/images/all/Nautilus-Hero-Team.jpg`,
       `${PUBLIC}/images/all/Carvao-Team.jpg`,
+      `${PUBLIC}/images/all/Team-India.jpg`
     ]
 
   },
