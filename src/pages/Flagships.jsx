@@ -8,7 +8,7 @@ import { AIRCRAFT_DATA } from '../data';
 import LazyImage from '../components/LazyImage';
 import YoutubeThumbnail from '../components/YoutubeThumbnail';
 import { deriveVariants } from '../utils/imageVariants';
-import { isYoutubeUrl } from '../utils/youtubeUtils';
+import { isYoutubeUrl, extractYoutubeId } from '../utils/youtubeUtils';
 
 // === Reveal helper (Copied from Home.jsx for consistent animation) ===
 const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
@@ -183,6 +183,7 @@ const Flagships = () => {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         {selectedCraft.gallery.map((item, idx) => {
                           const isVideo = isYoutubeUrl(item);
+                          const videoId = isVideo ? extractYoutubeId(item) : null;
 
                           return (
                             <motion.button
@@ -195,7 +196,7 @@ const Flagships = () => {
                               {isVideo ? (
                                 // For videos, use YoutubeThumbnail component with fallback
                                 <YoutubeThumbnail
-                                  videoUrl={item}
+                                  videoId={videoId}
                                   alt={`Gallery Thumbnail ${idx + 1}`}
                                   className="w-full h-full object-cover"
                                 />
