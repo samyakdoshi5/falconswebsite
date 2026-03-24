@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
-import { X } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 import PhotoViewer from '../components/PhotoViewer';
 import { GALLERY_CATEGORIES } from '../data';
 import LazyImage from '../components/LazyImage';
 import { deriveVariants } from '../utils/imageVariants';
+import { isYoutubeUrl, extractYoutubeId, getYoutubeThumbnail } from '../utils/youtubeUtils';
 
 // === Reveal helper (Copied from Home.jsx for consistent animation) ===
 const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
@@ -21,7 +22,7 @@ const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
   return (
     <motion.div ref={ref} variants={variants} initial="hidden" animate={'visible'}>
       {children}
-    </motion.div> 
+    </motion.div>
   );
 };
 
@@ -56,31 +57,31 @@ const Gallery = () => {
           const coverVars = deriveVariants(cat.coverImage);
           return (
             <Reveal key={idx} duration={0.5} delay={0.1 * idx} amount={0.2}>
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[16/9]"
-              onClick={() => setSelectedCategory(cat)}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            >
-              {/* Cover image now lazy-loaded */}
-              <LazyImage
-                variants={coverVars}
-                alt={cat.name}
-                sizes="(max-width: 768px) 100vw, 33vw"
-                style={{ width: '100%', height: '100%' }}
-                className="transition duration-500 group-hover:blur-sm"
-              />
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[16/9]"
+                onClick={() => setSelectedCategory(cat)}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                {/* Cover image now lazy-loaded */}
+                <LazyImage
+                  variants={coverVars}
+                  alt={cat.name}
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  style={{ width: '100%', height: '100%' }}
+                  className="transition duration-500 group-hover:blur-sm"
+                />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center justify-center">
-                <h3 className="text-2xl md:text-3xl font-bold text-white border-b-2 border-tech-gold/60 pb-1">
-                  <span className="inline-block px-3 py-1 bg-black/40 rounded-md backdrop-blur-sm">
-                    {cat.name}
-                  </span>
-                </h3>
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-center justify-center">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white border-b-2 border-tech-gold/60 pb-1">
+                    <span className="inline-block px-3 py-1 bg-black/40 rounded-md backdrop-blur-sm">
+                      {cat.name}
+                    </span>
+                  </h3>
+                </div>
 
-              <div className="absolute left-0 right-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-tech-gold to-transparent opacity-90" />
-            </motion.div>
+                <div className="absolute left-0 right-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-tech-gold to-transparent opacity-90" />
+              </motion.div>
             </Reveal>
           );
         })}
@@ -123,28 +124,57 @@ const Gallery = () => {
               <div className="flex-1 min-h-0">
                 <div className="h-full overflow-y-auto p-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-start">
-                    {selectedCategory.photos.map((img, i) => {
-                      const vars = deriveVariants(img);
+                    {selectedCategory.photos.map((item, i) => {
+                      const isVideo = isYoutubeUrl(item);
+
                       return (
                         <motion.button
                           key={i}
-                          whileHover={{ scale: 1.05 }} // Added hover animation for gallery images
+                          whileHover={{ scale: 1.05 }}
                           onClick={() =>
                             setViewerData({
-                              photos: selectedCategory.photos, // original string paths
+                              photos: selectedCategory.photos,
                               index: i
                             })
                           }
                           className="relative group cursor-pointer aspect-video overflow-hidden rounded-lg shadow-md bg-tech-800 transform transition hover:-translate-y-1"
                           style={{ aspectRatio: '16/9', width: '100%' }}
                         >
-                          {/* Thumbnail in grid (loads small file only) */}
-                          <LazyImage
-                            variants={vars}
-                            alt={`${selectedCategory.name}-${i}`}
-                            sizes="(max-width: 640px) 100vw, 200px"
-                            style={{ width: '100%', height: '100%' }}
-                          />
+                          {isVideo ? (
+                            // For videos, render YouTube thumbnail directly
+                            (() => {
+                              const videoId = extractYoutubeId(item);
+                              const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
+                              return (
+                                <img
+                                  src={thumbnailUrl}
+                                  alt={`${selectedCategory.name}-${i}`}
+                                  style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    display: 'block'
+                                  }}
+                                  loading="lazy"
+                                />
+                              );
+                            })()
+                          ) : (
+                            // For images, use LazyImage as before
+                            <LazyImage
+                              variants={deriveVariants(item)}
+                              alt={`${selectedCategory.name}-${i}`}
+                              sizes="(max-width: 640px) 100vw, 200px"
+                              style={{ width: '100%', height: '100%' }}
+                            />
+                          )}
+
+                          {/* Play icon overlay for videos */}
+                          {isVideo && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition">
+                              <Play size={32} className="text-white fill-white" />
+                            </div>
+                          )}
 
                           <div className="absolute inset-0 pointer-events-none rounded-lg opacity-0 group-hover:opacity-100 transition">
                             <div className="absolute inset-0 border-2 rounded-lg border-tech-gold/30 shadow-[0_8px_30px_-10px_rgba(227,175,100,0.25)]" />

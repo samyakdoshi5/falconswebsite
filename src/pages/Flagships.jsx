@@ -2,11 +2,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react'; // Import React for the Reveal component
-import { X } from 'lucide-react';
+import { X, Play } from 'lucide-react';
 import PhotoViewer from '../components/PhotoViewer';
 import { AIRCRAFT_DATA } from '../data';
 import LazyImage from '../components/LazyImage';
 import { deriveVariants } from '../utils/imageVariants';
+import { isYoutubeUrl, extractYoutubeId, getYoutubeThumbnail } from '../utils/youtubeUtils';
 
 // === Reveal helper (Copied from Home.jsx for consistent animation) ===
 const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
@@ -59,7 +60,7 @@ const Flagships = () => {
                 className="relative rounded-xl overflow-hidden cursor-pointer group aspect-[16/9]"
                 onClick={() => setSelectedCraft(craft)}
                 // Add explicit transition to avoid conflicts with whileHover when combined with Reveal's transition
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }} 
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 {/* Lazy-loaded cover */}
                 <LazyImage
@@ -179,25 +180,59 @@ const Flagships = () => {
                         <span className="text-tech-gold mr-2">◉</span> Additional Photos
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {selectedCraft.gallery.map((photo, idx) => (
-                          <motion.button
-                            key={idx}
-                            whileHover={{ scale: 1.05 }}
-                            className="relative group cursor-pointer aspect-video overflow-hidden rounded-lg shadow-md bg-tech-800 transform transition hover:-translate-y-1"
-                            style={{ aspectRatio: '16/9', width: '100%' }}
-                            onClick={() => setViewerData({ photos: selectedCraft.gallery, index: idx })}
-                          >
-                            <LazyImage
-                              variants={deriveVariants(photo)}
-                              alt={`Gallery Thumbnail ${idx + 1}`}
-                              sizes="(max-width: 640px) 100vw, 200px"
-                              style={{ width: '100%', height: '100%' }}
-                            />
-                            <div className="absolute inset-0 pointer-events-none rounded-lg opacity-0 group-hover:opacity-100 transition">
-                              <div className="absolute inset-0 border-2 rounded-lg border-tech-gold/30 shadow-[0_8px_30px_-10px_rgba(227,175,100,0.25)]" />
-                            </div>
-                          </motion.button>
-                        ))}
+                        {selectedCraft.gallery.map((item, idx) => {
+                          const isVideo = isYoutubeUrl(item);
+
+                          return (
+                            <motion.button
+                              key={idx}
+                              whileHover={{ scale: 1.05 }}
+                              className="relative group cursor-pointer aspect-video overflow-hidden rounded-lg shadow-md bg-tech-800 transform transition hover:-translate-y-1"
+                              style={{ aspectRatio: '16/9', width: '100%' }}
+                              onClick={() => setViewerData({ photos: selectedCraft.gallery, index: idx })}
+                            >
+                              {isVideo ? (
+                                // For videos, render YouTube thumbnail directly
+                                (() => {
+                                  const videoId = extractYoutubeId(item);
+                                  const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
+                                  return (
+                                    <img
+                                      src={thumbnailUrl}
+                                      alt={`Gallery Thumbnail ${idx + 1}`}
+                                      style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        display: 'block'
+                                      }}
+                                      loading="lazy"
+                                    />
+                                  );
+                                })()
+                              ) : (
+                                // For images, use LazyImage as before
+                                <LazyImage
+                                  variants={deriveVariants(item)}
+                                  alt={`Gallery Thumbnail ${idx + 1}`}
+                                  sizes="(max-width: 640px) 100vw, 200px"
+                                  style={{ width: '100%', height: '100%' }}
+                                />
+                              )}
+
+                              {/* Play icon overlay for videos */}
+                              {isVideo && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition">
+                                  <Play size={32} className="text-white fill-white" />
+                                </div>
+                              )}
+
+                              <div className="absolute inset-0 pointer-events-none rounded-lg opacity-0 group-hover:opacity-100 transition">
+                                <div className="absolute inset-0 border-2 rounded-lg border-tech-gold/30 shadow-[0_8px_30px_-10px_rgba(227,175,100,0.25)]" />
+                              </div>
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     </div>
                   )}

@@ -2,12 +2,27 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { deriveVariants } from '../utils/imageVariants';
+import { isYoutubeUrl, extractYoutubeId, getEmbedUrl, getYoutubeThumbnail } from '../utils/youtubeUtils';
 
-const makeVariants = (photo) => {
-  if (!photo) return null;
-  if (typeof photo === 'string') return deriveVariants(photo);
-  if (photo.variants) return photo.variants;
-  return photo;
+const makeVariants = (item) => {
+  if (!item) return null;
+
+  // Handle YouTube videos - return simple thumbnail variant
+  if (isYoutubeUrl(item)) {
+    const videoId = extractYoutubeId(item);
+    const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
+    return {
+      full: thumbnailUrl,
+      jpg_1600: thumbnailUrl,
+      jpg_800: thumbnailUrl,
+      jpg_400: thumbnailUrl,
+    };
+  }
+
+  // Handle image paths
+  if (typeof item === 'string') return deriveVariants(item);
+  if (item.variants) return item.variants;
+  return item;
 };
 
 const buildSrcSet = (variants, pref = 'webp') => {
@@ -76,7 +91,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
     return () => {
       mounted = false;
       if (bg) {
-        try { bg.onload = null; bg.onerror = null; bg.src = ''; } catch (e) {}
+        try { bg.onload = null; bg.onerror = null; bg.src = ''; } catch (e) { }
       }
     };
   }, [currentIndex, photos, len]);
@@ -106,7 +121,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
 
     return () =>
       loaders.forEach((img) => {
-        try { img.src = ''; } catch (e) {}
+        try { img.src = ''; } catch (e) { }
       });
   }, [currentIndex, photos, len]);
 
@@ -138,7 +153,7 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Image viewer, image ${currentIndex + 1} of ${len}`}
+      aria-label={`Media viewer, ${isYoutubeUrl(photos[currentIndex]) ? 'video' : 'image'} ${currentIndex + 1} of ${len}`}
     >
       <button
         onClick={(e) => { e.stopPropagation(); onClose?.(); }}
@@ -161,64 +176,103 @@ const PhotoViewer = ({ photos = [], initialIndex = 0, onClose, sizes = '100vw' }
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '90vw',
-          maxHeight: '90vh',
+          width: '90vw',
+          height: '90vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
         }}
       >
-        {/* Base layer: 1600 via <picture>. Visible while fullLoadedSrc is null; fades out when full is ready */}
-        <div
-          style={{
-            transition: 'opacity 500ms ease',
-            opacity: fullLoadedSrc ? 0 : 1,
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            // IMPORTANT: don't let the hidden base layer capture pointer events once the full image is ready
-            pointerEvents: fullLoadedSrc ? 'none' : 'auto',
-          }}
-          aria-hidden={!!fullLoadedSrc}
-        >
-          <picture>
-            {webpSrcSet && <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />}
-            {jpgSrcSet && <source type="image/jpeg" srcSet={jpgSrcSet} sizes={sizes} />}
-            <img
-              src={encodeURI(initialDisplay)}
-              alt={`View ${currentIndex + 1} of ${len}`} 
-              style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
-              loading="eager"
-              decoding="async"
-              // keep fetchpriority lowercase
-              fetchpriority="high"
-            />
-          </picture>
-        </div>
+        {isYoutubeUrl(photos[currentIndex]) ? (
+          // ===== VIDEO PLAYER =====
+          (() => {
+            const videoId = extractYoutubeId(photos[currentIndex]);
+            const embedUrl = getEmbedUrl(videoId);
+            // const thumbnailUrl = getYoutubeThumbnail(videoId, 'maxresdefault');
+            return (
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  aspectRatio: '16/9',
+                  maxWidth: '90vw',
+                  maxHeight: '90vh',
+                }}
+              >
+                <iframe
+                  key={`video-${currentIndex}`}
+                  src={embedUrl}
+                  title={`Video ${currentIndex + 1} of ${len}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    border: 'none',
+                    borderRadius: '8px',
+                  }}
+                />
+              </div>
+            );
+          })()
+        ) : (
+          // ===== IMAGE DISPLAY =====
+          <>
+            {/* Base layer: 1600 via <picture>. Visible while fullLoadedSrc is null; fades out when full is ready */}
+            <div
+              style={{
+                transition: 'opacity 500ms ease',
+                opacity: fullLoadedSrc ? 0 : 1,
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                // IMPORTANT: don't let the hidden base layer capture pointer events once the full image is ready
+                pointerEvents: fullLoadedSrc ? 'none' : 'auto',
+              }}
+              aria-hidden={!!fullLoadedSrc}
+            >
+              <picture>
+                {webpSrcSet && <source type="image/webp" srcSet={webpSrcSet} sizes={sizes} />}
+                {jpgSrcSet && <source type="image/jpeg" srcSet={jpgSrcSet} sizes={sizes} />}
+                <img
+                  src={encodeURI(initialDisplay)}
+                  alt={`View ${currentIndex + 1} of ${len}`}
+                  style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain', display: 'block' }}
+                  loading="eager"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+              </picture>
+            </div>
 
-        {/* Top layer: full image — only rendered when available; crossfades in */}
-        {fullLoadedSrc && (
-          <img
-            src={fullLoadedSrc}
-            alt={`View ${currentIndex + 1} (full)`}
-            style={{
-              maxWidth: '90vw',
-              maxHeight: '90vh',
-              objectFit: 'contain',
-              display: 'block',
-              transition: 'opacity 500ms ease',
-              opacity: 1,
-              position: 'relative',
-              zIndex: 20,              // image sits below controls
-              pointerEvents: 'auto',   // image can still be interacted with if needed
-            }}
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
+            {/* Top layer: full image — only rendered when available; crossfades in */}
+            {fullLoadedSrc && (
+              <img
+                src={fullLoadedSrc}
+                alt={`View ${currentIndex + 1} (full)`}
+                style={{
+                  maxWidth: '90vw',
+                  maxHeight: '90vh',
+                  objectFit: 'contain',
+                  display: 'block',
+                  transition: 'opacity 500ms ease',
+                  opacity: 1,
+                  position: 'relative',
+                  zIndex: 20,              // image sits below controls
+                  pointerEvents: 'auto',   // image can still be interacted with if needed
+                }}
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+            )}
+          </>
         )}
       </div>
 

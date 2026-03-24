@@ -145,7 +145,9 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Aquarius-3.jpg`,
       `${PUBLIC}/images/all/Aquarius-4.jpg`,
       `${PUBLIC}/images/all/Aquarius-Award.png`,
-      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`
+      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`,
+      "https://www.youtube.com/watch?v=0VigeycA704",
+      "https://www.youtube.com/watch?v=K5NKdVxcRgg"
     ]
   },
   {
@@ -165,7 +167,8 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Trident-5.jpg`,
       `${PUBLIC}/images/all/Trident-Team.jpg`,
       `${PUBLIC}/images/all/Trident-Awards.jpg`,
-      `${PUBLIC}/images/all/Trident-Awards-2.jpeg`
+      `${PUBLIC}/images/all/Trident-Awards-2.jpeg`,
+      "https://www.youtube.com/watch?v=MCQTYmoWkpg"
     ]
   },
   {
@@ -195,7 +198,8 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Airavat-Comp.jpg`,
       `${PUBLIC}/images/all/Airavat-Comp-2.jpg`,
       `${PUBLIC}/images/all/Airavat-Render.png`,
-      `${PUBLIC}/images/all/Airavat-Team.jpg`
+      `${PUBLIC}/images/all/Airavat-Team.jpg`,
+      "https://www.youtube.com/watch?v=URvE0RfHwP4"
     ]
   },
   {
@@ -210,7 +214,9 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Redbird-1.jpg`,
       `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
       `${PUBLIC}/images/all/Redbird-Award.jpg`,
-      `${PUBLIC}/images/all/Redbird-Team.jpg`
+      `${PUBLIC}/images/all/Redbird-Team.jpg`,
+      "https://www.youtube.com/watch?v=_QFCf2j-ffY",
+      "https://www.youtube.com/watch?v=jPY-tGPpjbk"
     ]
   },
   {
@@ -348,22 +354,22 @@ export const CONTACT_CONFIG = {
 // 6. SPONSOR US PAGE
 // =================================================================================
 export const PERKS = [
-    { icon: Cpu, title: 'Technical Collaboration', desc: 'Component donations, dev boards, electronics and hardware.' },
-    { icon: Layers, title: 'Software & Licenses', desc: 'Software licenses, compute credits, SDKs.' },
-    { icon: Gift, title: 'Monetary Support', desc: 'Funding for projects, discounts on components and services.' },
-    { icon: Wrench, title: 'Mentorship & Access', desc: 'Office hours, guest lectures, recruitment pipeline.' },
+  { icon: Cpu, title: 'Technical Collaboration', desc: 'Component donations, dev boards, electronics and hardware.' },
+  { icon: Layers, title: 'Software & Licenses', desc: 'Software licenses, compute credits, SDKs.' },
+  { icon: Gift, title: 'Monetary Support', desc: 'Funding for projects, discounts on components and services.' },
+  { icon: Wrench, title: 'Mentorship & Access', desc: 'Office hours, guest lectures, recruitment pipeline.' },
 ];
 
 export const WHAT_WE_PROVIDE = [
-    'Brand visibility across competitions, social and campus events',
-    'Technical reports, demo day, post-campaign analytics',
-    'Access to student talent for internships & recruitment',
-    'Brand placement on banners, team apparel, website and social media'
+  'Brand visibility across competitions, social and campus events',
+  'Technical reports, demo day, post-campaign analytics',
+  'Access to student talent for internships & recruitment',
+  'Brand placement on banners, team apparel, website and social media'
 ];
 
 export const WHAT_WE_EXPECT = [
-    'Clear deliverables and timeline for in-kind donations',
-    'Logo and brand assets (SVG, color guide) for marketing purposes',
-    'Technical documentation for hardware/software donations',
-    'Compliance with safety & export rules for restricted components'
+  'Clear deliverables and timeline for in-kind donations',
+  'Logo and brand assets (SVG, color guide) for marketing purposes',
+  'Technical documentation for hardware/software donations',
+  'Compliance with safety & export rules for restricted components'
 ];
