@@ -108,7 +108,9 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Vidhyut-Flight3.jpg`,
       `${PUBLIC}/images/all/Vidhyut-Flight-Comp.jpg`,
       `${PUBLIC}/images/all/Vidhyut-General.jpg`,
-      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`
+      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
+      "https://www.youtube.com/watch?v=NPTmgh9uSSY",
+      "https://www.youtube.com/watch?v=oS2buLNerUo"
     ]
   },
   {
@@ -256,7 +258,7 @@ export const AIRCRAFT_DATA = [
 // =================================================================================
 export const GALLERY_CATEGORIES = [
   {
-    name: "Flights",
+    name: "Up in Flight!",
     coverImage: `${PUBLIC}/images/all/Vidhyut-Flight-Comp.jpg`,
     photos: [
       `${PUBLIC}/images/all/Vidhyut-Flight.jpg`,
@@ -270,7 +272,7 @@ export const GALLERY_CATEGORIES = [
     ]
   },
   {
-    name: "Competition Photos",
+    name: "Competition Moments",
     coverImage: `${PUBLIC}/images/all/Airavat-Comp.jpg`,
     photos: [
       `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
@@ -288,7 +290,7 @@ export const GALLERY_CATEGORIES = [
     ]
   },
   {
-    name: "Events",
+    name: "Outreach & Engagements",
     coverImage: `${PUBLIC}/images/all/Events.jpg`,
     photos: [
       `${PUBLIC}/images/all/Events.jpg`,
@@ -302,7 +304,7 @@ export const GALLERY_CATEGORIES = [
     ]
   },
   {
-    name: "Team",
+    name: "Meet the Team.",
     coverImage: `${PUBLIC}/images/all/Team-India.jpg`,
     photos: [
       `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
@@ -320,17 +322,21 @@ export const GALLERY_CATEGORIES = [
 
   },
   {
-    name: "General",
+    name: "Watch Us Fly",
     coverImage: `${PUBLIC}/images/all/General2.jpg`,
     photos: [
-      `${PUBLIC}/images/all/General2.jpg`,
-      `${PUBLIC}/images/all/General3.jpg`,
-      `${PUBLIC}/images/all/General4.jpg`,
-      `${PUBLIC}/images/all/General5.jpg`
+      "https://www.youtube.com/watch?v=NPTmgh9uSSY",
+      "https://www.youtube.com/watch?v=oS2buLNerUo",
+      "https://www.youtube.com/watch?v=0VigeycA704",
+      "https://www.youtube.com/watch?v=K5NKdVxcRgg",
+      "https://www.youtube.com/watch?v=MCQTYmoWkpg",
+      "https://www.youtube.com/watch?v=URvE0RfHwP4",
+      "https://www.youtube.com/watch?v=_QFCf2j-ffY",
+      "https://www.youtube.com/watch?v=jPY-tGPpjbk"
     ]
   },
   {
-    name: "Awards",
+    name: "Awards & Milestones",
     coverImage: `${PUBLIC}/images/all/Vidhyut-Awards.jpg`,
     photos: [
       `${PUBLIC}/images/all/Vidhyut-Awards.jpg`,

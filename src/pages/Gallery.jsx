@@ -6,8 +6,9 @@ import { X, Play } from 'lucide-react';
 import PhotoViewer from '../components/PhotoViewer';
 import { GALLERY_CATEGORIES } from '../data';
 import LazyImage from '../components/LazyImage';
+import YoutubeThumbnail from '../components/YoutubeThumbnail';
 import { deriveVariants } from '../utils/imageVariants';
-import { isYoutubeUrl, extractYoutubeId, getYoutubeThumbnail } from '../utils/youtubeUtils';
+import { isYoutubeUrl, extractYoutubeId } from '../utils/youtubeUtils';
 
 // === Reveal helper (Copied from Home.jsx for consistent animation) ===
 const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
@@ -123,7 +124,7 @@ const Gallery = () => {
 
               <div className="flex-1 min-h-0">
                 <div className="h-full overflow-y-auto p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-start">
+                  <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5 items-start">
                     {selectedCategory.photos.map((item, i) => {
                       const isVideo = isYoutubeUrl(item);
 
@@ -141,13 +142,12 @@ const Gallery = () => {
                           style={{ aspectRatio: '16/9', width: '100%' }}
                         >
                           {isVideo ? (
-                            // For videos, render YouTube thumbnail directly
+                            // For videos, use YouTube thumbnail with fallback
                             (() => {
                               const videoId = extractYoutubeId(item);
-                              const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
                               return (
-                                <img
-                                  src={thumbnailUrl}
+                                <YoutubeThumbnail
+                                  videoId={videoId}
                                   alt={`${selectedCategory.name}-${i}`}
                                   style={{
                                     width: '100%',
@@ -155,7 +155,6 @@ const Gallery = () => {
                                     objectFit: 'cover',
                                     display: 'block'
                                   }}
-                                  loading="lazy"
                                 />
                               );
                             })()

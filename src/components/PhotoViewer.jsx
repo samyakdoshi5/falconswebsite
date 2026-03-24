@@ -10,7 +10,7 @@ const makeVariants = (item) => {
   // Handle YouTube videos - return simple thumbnail variant
   if (isYoutubeUrl(item)) {
     const videoId = extractYoutubeId(item);
-    const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
+    const thumbnailUrl = getYoutubeThumbnail(videoId, 'maxresdefault');
     return {
       full: thumbnailUrl,
       jpg_1600: thumbnailUrl,

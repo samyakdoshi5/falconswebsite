@@ -6,8 +6,9 @@ import { X, Play } from 'lucide-react';
 import PhotoViewer from '../components/PhotoViewer';
 import { AIRCRAFT_DATA } from '../data';
 import LazyImage from '../components/LazyImage';
+import YoutubeThumbnail from '../components/YoutubeThumbnail';
 import { deriveVariants } from '../utils/imageVariants';
-import { isYoutubeUrl, extractYoutubeId, getYoutubeThumbnail } from '../utils/youtubeUtils';
+import { isYoutubeUrl } from '../utils/youtubeUtils';
 
 // === Reveal helper (Copied from Home.jsx for consistent animation) ===
 const Reveal = ({ children, delay = 0, duration = 0.5, amount = 0.1 }) => {
@@ -50,7 +51,7 @@ const Flagships = () => {
       </div>
 
       {/* Grid of aircraft cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {AIRCRAFT_DATA.map((craft, index) => {
           const coverVars = deriveVariants(craft.coverImage);
           return (
@@ -100,7 +101,7 @@ const Flagships = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-5xl h-[80vh] bg-card-gradient bg-opacity-80 rounded-xl overflow-hidden flex flex-col relative border border-slate-700 shadow-2xl"
+              className="w-full max-w-6xl h-[80vh] bg-card-gradient bg-opacity-80 rounded-xl overflow-hidden flex flex-col relative border border-slate-700 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
@@ -192,24 +193,12 @@ const Flagships = () => {
                               onClick={() => setViewerData({ photos: selectedCraft.gallery, index: idx })}
                             >
                               {isVideo ? (
-                                // For videos, render YouTube thumbnail directly
-                                (() => {
-                                  const videoId = extractYoutubeId(item);
-                                  const thumbnailUrl = getYoutubeThumbnail(videoId, 'default');
-                                  return (
-                                    <img
-                                      src={thumbnailUrl}
-                                      alt={`Gallery Thumbnail ${idx + 1}`}
-                                      style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover',
-                                        display: 'block'
-                                      }}
-                                      loading="lazy"
-                                    />
-                                  );
-                                })()
+                                // For videos, use YoutubeThumbnail component with fallback
+                                <YoutubeThumbnail
+                                  videoUrl={item}
+                                  alt={`Gallery Thumbnail ${idx + 1}`}
+                                  className="w-full h-full object-cover"
+                                />
                               ) : (
                                 // For images, use LazyImage as before
                                 <LazyImage

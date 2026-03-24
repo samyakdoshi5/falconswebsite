@@ -40,12 +40,38 @@ export const extractYoutubeId = (url) => {
 };
 
 /**
- * Get YouTube video thumbnail URL
+ * Get YouTube video thumbnail URL with fallback support
+ * Tries higher quality thumbnails first, falls back to lower quality
  * Quality options: 'maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default'
  */
 export const getYoutubeThumbnail = (videoId, quality = 'maxresdefault') => {
     if (!videoId) return null;
-    return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+
+    // Define fallback chain: try in this order for best quality
+    const qualityChain = [
+        'maxresdefault', // 1280x720 (best, but not always available)
+        'sddefault',     // 640x480
+        'hqdefault',     // 480x360
+        'mqdefault',     // 320x180
+        'default'        // 120x90 (always available)
+    ];
+
+    // If a specific quality is requested, start from that one and fall through chain
+    const startIndex = qualityChain.indexOf(quality);
+    const chain = startIndex !== -1 ? qualityChain.slice(startIndex) : qualityChain;
+
+    // Return the highest quality URL (the client will handle fallback if it fails)
+    return `https://img.youtube.com/vi/${videoId}/${chain[0]}.jpg`;
+};
+
+/**
+ * Get all YouTube thumbnail URLs in quality order for fallback
+ */
+export const getYoutubeThumbnailUrls = (videoId) => {
+    if (!videoId) return [];
+
+    const qualities = ['maxresdefault', 'sddefault', 'hqdefault', 'mqdefault', 'default'];
+    return qualities.map(quality => `https://img.youtube.com/vi/${videoId}/${quality}.jpg`);
 };
 
 /**
