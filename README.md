@@ -157,6 +157,16 @@ node ./scripts/fix-image-extensions.js
    npm run predeploy && npm run deploy
    ```
 
+4. After steps 2 or 3:
+   - 1. Check: GitHub repo -> Actions.
+         Wait till "pages build and deployment" is complete.
+
+   - 2. GitHub repo -> Settings -> Pages (Left Pane) -> Custom Domain
+         Enter custom domain:
+         ```bash
+            npm run build
+         ```
+
 ### Deploy to Custom Server
 
 1. Build the app:
