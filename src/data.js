@@ -56,8 +56,7 @@ export const STATS_DATA = [
   { label: "Founding Year", value: "2010" },
   { label: "Aircraft Built", value: "20+" },
   {
-    label: `World
-Rank`, value: "#3"
+    label: `World Rank`, value: "#3"
   },
   { label: "India Rank", value: "#1" }
 ];
@@ -95,6 +94,8 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Vidhyut-Hero.jpg`,
     description: "Vidhyut, our 2025 flagship, is an advanced autonomous tiltrotor VTOL aircraft engineered for high-performance payload missions in constrained environments. Its refined tiltrotor architecture enables seamless transitions between vertical takeoff/landing and efficient forward flight, delivering exceptional agility and extended operational range. Equipped with cutting-edge avionics and a robust, precision-engineered structure, Vidhyut offers unmatched reliability and mission capability. Its design excellence and performance have secured a #3 global ranking, reflecting the team’s unwavering drive to push the frontiers of UAV innovation.",
     gallery: [
+      "https://www.youtube.com/watch?v=NPTmgh9uSSY",
+      "https://www.youtube.com/watch?v=oS2buLNerUo",
       `${PUBLIC}/images/all/Vidhyut-Hero.jpg`,
       `${PUBLIC}/images/all/Vidhyut-2.jpg`,
       `${PUBLIC}/images/all/Vidhyut-3.jpg`,
@@ -108,9 +109,7 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Vidhyut-Flight3.jpg`,
       `${PUBLIC}/images/all/Vidhyut-Flight-Comp.jpg`,
       `${PUBLIC}/images/all/Vidhyut-General.jpg`,
-      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
-      "https://www.youtube.com/watch?v=NPTmgh9uSSY",
-      "https://www.youtube.com/watch?v=oS2buLNerUo"
+      `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`
     ]
   },
   {
@@ -122,6 +121,7 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Marut-Hero.jpg`,
     description: "Marut, our 2024 flagship, is a high-performance blended-wing aircraft that earned the title of #1 in Asia. With a commanding 10-ft wingspan and the ability to carry 13 lbs of water, Marut is purpose-built for wildfire-oriented firefighting missions. Engineered for precision and reliability, it features a specialized deployment system capable of releasing an autonomous powered delta-wing vehicle mid-air to extend mission reach and responsiveness. Marut stands as a testament to our commitment to pioneering bold, mission-driven UAV solutions.",
     gallery: [
+      "https://www.youtube.com/watch?v=61DIDIHwqJc",
       `${PUBLIC}/images/all/Marut-Hero.jpg`,
       `${PUBLIC}/images/all/Marut-1.jpg`,
       `${PUBLIC}/images/all/Marut-2.jpg`,
@@ -141,15 +141,15 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Aquarius-Hero.jpeg`,
     description: "Aquarius, our 2023 flagship, was named after the water-bearing constellation — a testament to its design delivering an 11 lb water payload to achieve mission performance. This semi-tapered mid-wing aircraft cruises at 42 ft/s. The Powered Autonomous Delivery Aircraft (PADA) deployed from the primary aircraft provides parts for a fully autonomous Ground Transport Vehicle.",
     gallery: [
+      "https://www.youtube.com/watch?v=0VigeycA704",
+      "https://www.youtube.com/watch?v=K5NKdVxcRgg",
       `${PUBLIC}/images/all/Aquarius-Hero.jpeg`,
       `${PUBLIC}/images/all/Aquarius-1.jpg`,
       `${PUBLIC}/images/all/Aquarius-2.jpg`,
       `${PUBLIC}/images/all/Aquarius-3.jpg`,
       `${PUBLIC}/images/all/Aquarius-4.jpg`,
       `${PUBLIC}/images/all/Aquarius-Award.png`,
-      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`,
-      "https://www.youtube.com/watch?v=0VigeycA704",
-      "https://www.youtube.com/watch?v=K5NKdVxcRgg"
+      `${PUBLIC}/images/all/Aquarius-Flight-Team.jpg`
     ]
   },
   {
@@ -161,6 +161,7 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Trident-Hero.jpg`,
     description: "Trident, the 2022 flagship, is an electric mid-wing aircraft with a single motor. It can carry 40 lbs at a cruise speed of 43 ft/s. Its advanced avionics allow for autonomous mid-air deployment of a secondary aircraft equipped with lidar-operated Ground Terrain Vehicle (GTV). The GTV provides ground-level assistance to firefighters. Trident achieved a global ranking of 3rd place.",
     gallery: [
+      "https://www.youtube.com/watch?v=MCQTYmoWkpg",
       `${PUBLIC}/images/all/Trident-Hero.jpg`,
       `${PUBLIC}/images/all/Trident-Team2.jpg`,
       `${PUBLIC}/images/all/Trident-2.jpg`,
@@ -170,7 +171,6 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Trident-Team.jpg`,
       `${PUBLIC}/images/all/Trident-Awards.jpg`,
       `${PUBLIC}/images/all/Trident-Awards-2.jpeg`,
-      "https://www.youtube.com/watch?v=MCQTYmoWkpg"
     ]
   },
   {
@@ -195,13 +195,13 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Airavat-Hero.jpeg`,
     description: "Airavat is the 2020 flagship — an electric motor-propelled, high-wing aircraft with tricycle landing gear, capable of lifting 38 pounds at a cruise velocity of 43 ft/s. The aircraft can autonomously release two colonist delivery aircraft along with multiple supply payloads. It is ranked 3rd globally.",
     gallery: [
+      "https://www.youtube.com/watch?v=URvE0RfHwP4",
       `${PUBLIC}/images/all/Airavat-Hero.jpeg`,
       `${PUBLIC}/images/all/Airavat-Flight.jpg`,
       `${PUBLIC}/images/all/Airavat-Comp.jpg`,
       `${PUBLIC}/images/all/Airavat-Comp-2.jpg`,
       `${PUBLIC}/images/all/Airavat-Render.png`,
-      `${PUBLIC}/images/all/Airavat-Team.jpg`,
-      "https://www.youtube.com/watch?v=URvE0RfHwP4"
+      `${PUBLIC}/images/all/Airavat-Team.jpg`
     ]
   },
   {
@@ -213,12 +213,12 @@ export const AIRCRAFT_DATA = [
     coverImage: `${PUBLIC}/images/all/Redbird-1.jpg`,
     description: "Redbird is the 2019 flagship designed to simulate the colonization of Mars. Hoerner wingtips and a lifting-body fuselage increased the aircraft's aerodynamics and payload lifting capacity, leading the team to a worldwide 4th position and defending 1st position in the Asia-Pacific in the Advanced Class category of SAE Aero Design.",
     gallery: [
+      "https://www.youtube.com/watch?v=_QFCf2j-ffY",
+      "https://www.youtube.com/watch?v=jPY-tGPpjbk",
       `${PUBLIC}/images/all/Redbird-1.jpg`,
       `${PUBLIC}/images/all/Redbird-Flight-Comp.jpeg`,
       `${PUBLIC}/images/all/Redbird-Award.jpg`,
-      `${PUBLIC}/images/all/Redbird-Team.jpg`,
-      "https://www.youtube.com/watch?v=_QFCf2j-ffY",
-      "https://www.youtube.com/watch?v=jPY-tGPpjbk"
+      `${PUBLIC}/images/all/Redbird-Team.jpg`
     ]
   },
   {
@@ -327,6 +327,7 @@ export const GALLERY_CATEGORIES = [
     photos: [
       "https://www.youtube.com/watch?v=NPTmgh9uSSY",
       "https://www.youtube.com/watch?v=oS2buLNerUo",
+      "https://www.youtube.com/watch?v=61DIDIHwqJc",
       "https://www.youtube.com/watch?v=0VigeycA704",
       "https://www.youtube.com/watch?v=K5NKdVxcRgg",
       "https://www.youtube.com/watch?v=MCQTYmoWkpg",
