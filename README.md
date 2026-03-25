@@ -141,31 +141,28 @@ node ./scripts/fix-image-extensions.js
 
 ### Deploy to GitHub Pages
 
-1. Ensure `homepage` in `package.json` is set correctly:
+1. **Set the Homepage URL**: Update the `homepage` field in your `package.json` to match your GitHub Pages URL.
+
    ```json
    "homepage": "https://assailingfalcons.in"
    ```
 
-2. Build and deploy:
+2. **Build and Deploy**: Run the build and deploy commands.
+
    ```bash
    npm run build
    npm run deploy
    ```
 
-3. Or in one step:
+   Alternatively, deploy in one step:
+
    ```bash
    npm run predeploy && npm run deploy
    ```
 
-4. After steps 2 or 3:
-   - 1. Check: GitHub repo -> Actions.
-         Wait till "pages build and deployment" is complete.
+3. **Verify Deployment**: After deployment, check your GitHub repository's Actions tab to ensure the "pages build and deployment" workflow completes successfully.
 
-   - 2. GitHub repo -> Settings -> Pages (Left Pane) -> Custom Domain
-         Enter custom domain:
-         ```bash
-            npm run build
-         ```
+4. **Configure Custom Domain** Go to your repository's Settings > Pages, and enter your custom domain in the "Custom domain" field (i.e., `assailingfalcons.in`).
 
 ### Deploy to Custom Server
 
