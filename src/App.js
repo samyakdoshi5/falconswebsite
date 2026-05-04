@@ -25,11 +25,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-/**
- * Provide a mapping of route -> critical assets to preload.
- * All local/public assets are prefixed with PUBLIC so they resolve correctly
- * in both dev (PUBLIC="") and production (PUBLIC="/falconswebsite").
- */
+
 function assetsForPath(pathname) {
   // normalize trailing slash
   const p = pathname.replace(/\/+$/, "") || "/";
