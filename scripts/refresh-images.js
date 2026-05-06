@@ -13,6 +13,10 @@ if (!fs.existsSync(srcDir)) {
     process.exit(1);
 }
 
+function findExactSource(filename) {
+    return fs.readdirSync(srcDir).find((file) => file === filename);
+}
+
 // ----------------------
 // Helper: shouldProcess (same logic as your generator)
 // ----------------------
@@ -140,6 +144,12 @@ async function main() {
         const provided = path.basename(arg);
         if (!shouldProcess(provided)) {
             console.error('Provided file is not a source image or is a generated file:', provided);
+            process.exit(1);
+        }
+
+        if (!findExactSource(provided)) {
+            console.error('Provided file was not found with exact filename casing:', provided);
+            console.error('Rename the file or update the reference to match public/images/all exactly.');
             process.exit(1);
         }
 

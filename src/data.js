@@ -199,7 +199,7 @@ export const AIRCRAFT_DATA = [
       `${PUBLIC}/images/all/Airavat-Hero.jpeg`,
       `${PUBLIC}/images/all/Airavat-Flight.jpg`,
       `${PUBLIC}/images/all/Airavat-Comp.jpg`,
-      `${PUBLIC}/images/all/Airavat-Comp-2.jpg`,
+      `${PUBLIC}/images/all/Airavat-Comp-2.JPG`,
       `${PUBLIC}/images/all/Airavat-Render.png`,
       `${PUBLIC}/images/all/Airavat-Team.jpg`
     ]
@@ -245,7 +245,7 @@ export const AIRCRAFT_DATA = [
     description: "Jetaayu is the 2017 flagship of Team Assailing Falcons. The aircraft can be modified for weather analysis and thermal imaging. In SAE EAST Aero Design Competition, Jetaayu secured an overall world ranking of 7. It also helped the team secure an overall 3rd ranking in the Indian Space Conclave 2017 competition held by SEDS VIT.",
     gallery: [
       `${PUBLIC}/images/all/Jetaayu-Hero.jpeg`,
-      `${PUBLIC}/images/all/Jetaayu-2.jpg`,
+      `${PUBLIC}/images/all/Jetaayu-2.png`,
       `${PUBLIC}/images/all/Jetaayu-Team.jpg`,
       `${PUBLIC}/images/all/Jetaayu-Flight.jpg`
     ]
@@ -284,7 +284,7 @@ export const GALLERY_CATEGORIES = [
       `${PUBLIC}/images/all/Vidhyut-Comp-Flight.jpg`,
       `${PUBLIC}/images/all/Vidhyut-Team-Comp.jpg`,
       `${PUBLIC}/images/all/Airavat-Comp.jpg`,
-      `${PUBLIC}/images/all/Airavat-Comp-2.jpg`,
+      `${PUBLIC}/images/all/Airavat-Comp-2.JPG`,
       `${PUBLIC}/images/all/Comp-1.jpg`,
       `${PUBLIC}/images/all/Comp-2.jpg`
     ]
